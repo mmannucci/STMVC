@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ProvaSpringMVCGrails</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.wst.common.project.facet.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.springsource.sts.grails.core.nature</nature>
+		<nature>org.eclipse.jdt.groovy.core.groovyNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>calendar-1.2.0-SNAPSHOT3-grails-app-taglib</name>
+			<type>2</type>
+			<location>C:/Users/solving/.grails/1.2.0/projects/ProvaSpringMVCGrails/plugins/calendar-1.2.0-SNAPSHOT3/grails-app/taglib</location>
+		</link>
+		<link>
+			<name>hibernate-1.2.0-grails-app-i18n</name>
+			<type>2</type>
+			<location>C:/Users/solving/.grails/1.2.0/projects/ProvaSpringMVCGrails/plugins/hibernate-1.2.0/grails-app/i18n</location>
+		</link>
+		<link>
+			<name>tomcat-1.2.0-src-groovy</name>
+			<type>2</type>
+			<location>C:/Users/solving/.grails/1.2.0/projects/ProvaSpringMVCGrails/plugins/tomcat-1.2.0/src/groovy</location>
+		</link>
+	</linkedResources>
+</projectDescription>
