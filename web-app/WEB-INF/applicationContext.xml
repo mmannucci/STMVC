@@ -39,4 +39,8 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
           <value>utf-8</value>
         </property>
    </bean>    	
+   
+   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
+	<property name="basename" value="messages"/>
+	</bean>
 </beans>

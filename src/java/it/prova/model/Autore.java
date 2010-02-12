@@ -127,6 +127,7 @@ public class Autore {
 		
 		//errors.rejectValue("nome", "error.nome", "msgdefault");
 		errors.rejectValue("nome", "error.nome");
+		System.out.println(errors.getMessage());
 		domainErrors = errors.getAllErrors();
 		System.out.println("errors:" + domainErrors);
 		for (ObjectError e : domainErrors) {

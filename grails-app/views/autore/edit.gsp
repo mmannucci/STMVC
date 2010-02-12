@@ -11,9 +11,11 @@
     </head>
     <body>
     
-    	<g:beanErrors bean="${autoreInstance}" /> xxx
+    	beanErrors:<g:beanErrors bean="${autoreInstance}" />
     	
-    	<g:beanPropertyError bean="${autoreInstance}" property="nome" />		
+    	beanPropertyError:<g:beanPropertyError bean="${autoreInstance}" property="nome" />
+    	
+    	<g:eachError><p>${it.defaultMessage}</p></g:eachError>
 		
     
         <div class="nav">

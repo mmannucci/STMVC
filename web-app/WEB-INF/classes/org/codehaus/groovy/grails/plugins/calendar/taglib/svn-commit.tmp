@@ -1,4 +1,0 @@
-[GRAILSPLUGINS-1155] - use “resource” instead of “createLinkTo”
---This line, and those below, will be ignored--
-
-M    CalendarTagLib.groovy
