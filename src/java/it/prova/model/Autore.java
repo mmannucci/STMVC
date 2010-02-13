@@ -123,7 +123,7 @@ public class Autore {
 	public boolean validate() {
 		
 		System.out
-				.println("...............validate di Autore...................");
+				.println("...............validate di Autore xx...................");
 		BindingResult errors = new BeanPropertyBindingResult(this, "autore");
 		validator.validate(this, errors);
 		
