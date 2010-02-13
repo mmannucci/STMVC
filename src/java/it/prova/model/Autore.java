@@ -23,7 +23,9 @@ import javax.validation.constraints.Size;
 import org.codehaus.groovy.grails.commons.ApplicationHolder;
 import org.codehaus.groovy.grails.commons.spring.GrailsApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
@@ -122,12 +124,12 @@ public class Autore {
 		
 		System.out
 				.println("...............validate di Autore...................");
-		BindException errors = new BindException(this, "autore");
+		BindingResult errors = new BeanPropertyBindingResult(this, "autore");
 		validator.validate(this, errors);
 		
 		//errors.rejectValue("nome", "error.nome", "msgdefault");
-		errors.rejectValue("nome", "error.nome");
-		System.out.println(errors.getMessage());
+		//errors.rejectValue("nome", "error.nome");
+		//System.out.println(errors.getMessage());
 		domainErrors = errors.getAllErrors();
 		System.out.println("errors:" + domainErrors);
 		for (ObjectError e : domainErrors) {
