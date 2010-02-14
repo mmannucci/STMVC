@@ -63,6 +63,7 @@ public class @artifact.name@ {
 	public boolean validate() {
 		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.name@");
 		validator.validate(this, errors);
+		domainErrors = errors.getAllErrors();
 		return (domainErrors.isEmpty());
 	}
 	
