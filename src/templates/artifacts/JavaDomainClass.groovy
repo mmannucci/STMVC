@@ -1,4 +1,6 @@
-@artifact.package@import java.util.List;
+@artifact.package@import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import it.prova.util.HibernateUtil;
 
@@ -70,9 +72,28 @@ public class @artifact.name@ {
 	public static @artifact.name@ get(Long id) {
 		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().get(@artifact.name@.class, id);
 	}
+	
+	public static Set<@artifact.name@> list() {
+		// qui bisognerà fare una query...
+		return new HashSet<@artifact.name@>();
+	}
+	
+	public static Set<@artifact.name@> findAll(int offset, int max) {
+		// qui bisognerà fare una query...
+		return new HashSet<@artifact.name@>();
+	}
+	
+	public static int count() {
+		// qui bisognerà fare una query...
+		return 0;
+	}
 		
 	public @artifact.name@ save() {
 		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().save(this);
+	}
+	
+	public @artifact.name@ update() {
+		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
 	}
 	
 	public void delete() {

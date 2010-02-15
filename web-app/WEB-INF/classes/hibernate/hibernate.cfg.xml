@@ -9,7 +9,7 @@
 		<mapping class="it.prova.model.Libro" />
 		<mapping class="it.prova.model.Utente" />
 		<mapping class="it.prova.model.Autore" />
-		<mapping class="it.prova.model.Pippo" />
+		<mapping class="it.prova.model.Testo" />
 
 	</session-factory>
 
