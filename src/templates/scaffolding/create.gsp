@@ -22,7 +22,7 @@
                 <g:renderErrors bean="\${${propertyName}}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
+            <g:form action="save.dispatch" method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
                 <div class="dialog">
                     <table>
                         <tbody>

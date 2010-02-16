@@ -1,10 +1,10 @@
 
-<%@ page import="it.prova.model.Autore" %>
+<%@ page import="it.prova.model.Editore" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'autore.label', default: 'Autore')}" />
+        <g:set var="entityName" value="${message(code: 'editore.label', default: 'Editore')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -17,9 +17,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${autoreInstance}">
+            <g:hasErrors bean="${editoreInstance}">
             <div class="errors">
-                <g:renderErrors bean="${autoreInstance}" as="list" />
+                <g:renderErrors bean="${editoreInstance}" as="list" />
             </div>
             </g:hasErrors>
             <form action="save.dispatch" method="post" >
@@ -29,19 +29,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="nome"><g:message code="autore.nome.label" default="Nome" /></label>
+                                    <label for="nome"><g:message code="editore.nome.label" default="Nome" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: autoreInstance, field: 'nome', 'errors')}">
-                                    <g:textField name="nome" value="${autoreInstance?.nome}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="cognome"><g:message code="autore.cognome.label" default="Cognome" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: autoreInstance, field: 'cognome', 'errors')}">
-                                    <g:textField name="cognome" value="${autoreInstance?.cognome}" />
+                                <td valign="top" class="value ${hasErrors(bean: editoreInstance, field: 'nome', 'errors')}">
+                                    <g:textField name="nome" value="${editoreInstance?.nome}" />
                                 </td>
                             </tr>
                         

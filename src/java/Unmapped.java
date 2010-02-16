@@ -1,6 +1,4 @@
-@artifact.package@import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import it.prova.util.HibernateUtil;
 
@@ -18,7 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 @Entity
-public class @artifact.name@ {
+public class Unmapped {
 	
 	private Long id;
 	private Long version;
@@ -29,16 +27,16 @@ public class @artifact.name@ {
 	@Transient
 	private List<ObjectError> domainErrors;
 	
-	public @artifact.name@() {
+	public Unmapped() {
 		
 	}
 	
-	public @artifact.name@(Long id) {
+	public Unmapped(Long id) {
 		this.id = id;
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -59,41 +57,21 @@ public class @artifact.name@ {
 	
 	
 	public String toString() {
-		return "@artifact.name@:" + id;
+		return "Unmapped:" + id;
 	}
 	
 	public boolean validate() {
-		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.name@");
+		BindingResult errors = new BeanPropertyBindingResult(this, "Unmapped");
 		validator.validate(this, errors);
-		domainErrors = errors.getAllErrors();
 		return (domainErrors.isEmpty());
 	}
 	
-	public static @artifact.name@ get(Long id) {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().get(@artifact.name@.class, id);
-	}
-	
-	public static Set<@artifact.name@> list() {
-		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
-	}
-	
-	public static Set<@artifact.name@> findAll(int offset, int max) {
-		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
-	}
-	
-	public static int count() {
-		// qui bisogna fare una query...
-		return 0;
+	public static Unmapped get(Long id) {
+		return (Unmapped) HibernateUtil.sessionFactory().getCurrentSession().get(Unmapped.class, id);
 	}
 		
-	public Long save() {
-		return (Long) HibernateUtil.sessionFactory().getCurrentSession().save(this);
-	}
-	
-	public @artifact.name@ update() {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
+	public Unmapped save() {
+		return (Unmapped) HibernateUtil.sessionFactory().getCurrentSession().save(this);
 	}
 	
 	public void delete() {

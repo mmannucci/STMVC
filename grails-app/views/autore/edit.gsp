@@ -33,7 +33,7 @@
                 <g:renderErrors bean="${autoreInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <form action="/ProvaSpringMVCGrails/updateUtente.dispatch" method="post" >
+            <form action="updateUtente.dispatch" method="post" >
                 <g:hiddenField name="id" value="${autoreInstance?.id}" />
                 <g:hiddenField name="version" value="${autoreInstance?.version}" />
                 <div class="dialog">

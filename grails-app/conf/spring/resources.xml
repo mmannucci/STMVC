@@ -24,6 +24,7 @@
        
        
 <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+<bean scope="prototype" id="editore" class="it.prova.model.Editore"/>
 
 
 

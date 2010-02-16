@@ -1,4 +1,6 @@
-@artifact.package@import java.util.HashSet;
+package it.prova.model;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 @Entity
-public class @artifact.name@ {
+public class Pippo {
 	
 	private Long id;
 	private Long version;
@@ -29,16 +31,16 @@ public class @artifact.name@ {
 	@Transient
 	private List<ObjectError> domainErrors;
 	
-	public @artifact.name@() {
+	public Pippo() {
 		
 	}
 	
-	public @artifact.name@(Long id) {
+	public Pippo(Long id) {
 		this.id = id;
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -59,28 +61,28 @@ public class @artifact.name@ {
 	
 	
 	public String toString() {
-		return "@artifact.name@:" + id;
+		return "Pippo:" + id;
 	}
 	
 	public boolean validate() {
-		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.name@");
+		BindingResult errors = new BeanPropertyBindingResult(this, "Pippo");
 		validator.validate(this, errors);
 		domainErrors = errors.getAllErrors();
 		return (domainErrors.isEmpty());
 	}
 	
-	public static @artifact.name@ get(Long id) {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().get(@artifact.name@.class, id);
+	public static Pippo get(Long id) {
+		return (Pippo) HibernateUtil.sessionFactory().getCurrentSession().get(Pippo.class, id);
 	}
 	
-	public static Set<@artifact.name@> list() {
+	public static Set<Pippo> list() {
 		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+		return new HashSet<Pippo>();
 	}
 	
-	public static Set<@artifact.name@> findAll(int offset, int max) {
+	public static Set<Pippo> findAll(int offset, int max) {
 		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+		return new HashSet<Pippo>();
 	}
 	
 	public static int count() {
@@ -88,12 +90,12 @@ public class @artifact.name@ {
 		return 0;
 	}
 		
-	public Long save() {
-		return (Long) HibernateUtil.sessionFactory().getCurrentSession().save(this);
+	public Pippo save() {
+		return (Pippo) HibernateUtil.sessionFactory().getCurrentSession().save(this);
 	}
 	
-	public @artifact.name@ update() {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
+	public Pippo update() {
+		return (Pippo) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
 	}
 	
 	public void delete() {

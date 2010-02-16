@@ -1,4 +1,6 @@
-@artifact.package@import java.util.HashSet;
+package it.prova.model;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -7,10 +9,15 @@ import it.prova.util.HibernateUtil;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -18,10 +25,14 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 @Entity
-public class @artifact.name@ {
+public class Editore {
 	
 	private Long id;
 	private Long version;
+	
+	@NotNull
+	@Size(min = 1, max = 7, message = "{error.size}")
+	private String nome;
 	
 	@Autowired
 	private Validator validator;
@@ -29,16 +40,22 @@ public class @artifact.name@ {
 	@Transient
 	private List<ObjectError> domainErrors;
 	
-	public @artifact.name@() {
+	public Editore() {
 		
 	}
 	
-	public @artifact.name@(Long id) {
+	public Editore(Long id) {
 		this.id = id;
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")
+	@GeneratedValue(generator="hibseq")
+	@GenericGenerator(name="hibseq", strategy = "seqhilo",
+		    parameters = {
+		        @Parameter(name="max_lo", value = "5"),
+		        @Parameter(name="sequence", value="heybabyhey")
+		    }
+	)
 	public Long getId() {
 		return id;
 	}
@@ -56,31 +73,39 @@ public class @artifact.name@ {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-	
+
+	@Column(name = "nome")
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	public String toString() {
-		return "@artifact.name@:" + id;
+		return "Editore:" + id;
 	}
 	
 	public boolean validate() {
-		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.name@");
+		BindingResult errors = new BeanPropertyBindingResult(this, "editore");
 		validator.validate(this, errors);
 		domainErrors = errors.getAllErrors();
 		return (domainErrors.isEmpty());
 	}
 	
-	public static @artifact.name@ get(Long id) {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().get(@artifact.name@.class, id);
+	public static Editore get(Long id) {
+		return (Editore) HibernateUtil.sessionFactory().getCurrentSession().get(Editore.class, id);
 	}
 	
-	public static Set<@artifact.name@> list() {
+	public static Set<Editore> list() {
 		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+		return new HashSet<Editore>();
 	}
 	
-	public static Set<@artifact.name@> findAll(int offset, int max) {
+	public static Set<Editore> findAll(int offset, int max) {
 		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+		return new HashSet<Editore>();
 	}
 	
 	public static int count() {
@@ -92,8 +117,8 @@ public class @artifact.name@ {
 		return (Long) HibernateUtil.sessionFactory().getCurrentSession().save(this);
 	}
 	
-	public @artifact.name@ update() {
-		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
+	public Editore update() {
+		return (Editore) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
 	}
 	
 	public void delete() {
