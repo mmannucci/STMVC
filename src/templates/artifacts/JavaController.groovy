@@ -25,14 +25,9 @@ public class @artifact.name@ {
 
 	@RequestMapping(value = "/@artifact.propertyName@.dispatch", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max, ModelMap modelMap) {
-		if (offset != null || max != null) {
-			int sizeNo = max == null ? 10 : max.intValue();
-			modelMap.addAttribute("@artifact.propertyName@InstanceList", @artifact.className@.findAll(offset == null ? 0 : (offset.intValue() - 1) * sizeNo, sizeNo));
-			modelMap.addAttribute("@artifact.propertyName@InstanceTotal", @artifact.className@.count());
-		} else {
-			modelMap.addAttribute("@artifact.propertyName@InstanceList", @artifact.className@.list());
-			modelMap.addAttribute("@artifact.propertyName@InstanceTotal", @artifact.className@.count());	
-		}
+		int sizeNo = max == null ? 10 : max.intValue();
+		modelMap.addAttribute("@artifact.propertyName@InstanceList", @artifact.className@.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo));
+		modelMap.addAttribute("@artifact.propertyName@InstanceTotal", @artifact.className@.count());
 		return "/@artifact.propertyName@/list";
 	}
 
@@ -50,7 +45,7 @@ public class @artifact.name@ {
 		MyUtils.bindDataFromMap(@artifact.propertyName@, request);
 		if (!@artifact.propertyName@.validate()) {
 			modelMap.addAttribute("@artifact.propertyName@Instance", @artifact.propertyName@);
-			return "@artifact.propertyName@/create";
+			return "/@artifact.propertyName@/create";
 		}        
 		Long id = @artifact.propertyName@.save();
 		return "redirect:/@artifact.propertyName@/" + id + ".dispatch";

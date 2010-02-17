@@ -1,8 +1,8 @@
-@artifact.package@import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+@artifact.package@import it.prova.util.HibernateUtil;
 
 import it.prova.util.HibernateUtil;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,13 +10,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.codehaus.groovy.grails.commons.ApplicationHolder;
+import org.hibernate.Query;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
+@Component 
+@Scope("prototype")
 @Entity
 public class @artifact.name@ {
 	
@@ -38,7 +49,13 @@ public class @artifact.name@ {
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")
+	@GeneratedValue(generator="hibseq")
+	@GenericGenerator(name="hibseq", strategy = "seqhilo",
+		parameters = {
+			@Parameter(name="max_lo", value = "5"),
+			@Parameter(name="sequence", value="heybabyhey")
+		}
+	)
 	public Long getId() {
 		return id;
 	}
@@ -63,29 +80,35 @@ public class @artifact.name@ {
 	}
 	
 	public boolean validate() {
-		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.name@");
+		BindingResult errors = new BeanPropertyBindingResult(this, "@artifact.propertyName@");
 		validator.validate(this, errors);
 		domainErrors = errors.getAllErrors();
 		return (domainErrors.isEmpty());
+	}
+	
+	public static @artifact.name@ create(){
+		ApplicationContext ctx = ApplicationHolder.getApplication().getMainContext();
+		return (@artifact.name@)ctx.getBean("@artifact.propertyName@");
 	}
 	
 	public static @artifact.name@ get(Long id) {
 		return (@artifact.name@) HibernateUtil.sessionFactory().getCurrentSession().get(@artifact.name@.class, id);
 	}
 	
-	public static Set<@artifact.name@> list() {
-		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+	public static List<@artifact.name@> list() {
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from @artifact.name@");
+		return (List<@artifact.name@>)q.list();
 	}
 	
-	public static Set<@artifact.name@> findAll(int offset, int max) {
-		// qui bisogna fare una query...
-		return new HashSet<@artifact.name@>();
+	public static List<@artifact.name@> findAll(int offset, int max) {
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from @artifact.name@");
+		q.setFirstResult(offset);
+		q.setMaxResults(max);
+		return (List<@artifact.name@>)q.list();
 	}
 	
 	public static int count() {
-		// qui bisogna fare una query...
-		return 0;
+		return (Long) HibernateUtil.sessionFactory().getCurrentSession().createQuery("select count(*) from @artifact.name@").uniqueResult();
 	}
 		
 	public Long save() {

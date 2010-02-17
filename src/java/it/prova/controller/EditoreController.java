@@ -6,11 +6,8 @@ import it.test.MyUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.groovy.grails.commons.ApplicationHolder;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +22,11 @@ public class EditoreController {
 	@Autowired
 	protected SessionFactory sessionFactory;
 
-	@RequestMapping(value = "/editore.dispatch", method = RequestMethod.GET)
+	@RequestMapping(value = {"/editore.dispatch", "/editore/list.dispatch"}, method = RequestMethod.GET)
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max, ModelMap modelMap) {
-		if (offset != null || max != null) {
-			int sizeNo = max == null ? 10 : max.intValue();
-			modelMap.addAttribute("editoreInstaceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1) * sizeNo, sizeNo));
-			//float nrOfPages = (float) Editore.count() / sizeNo;
-			//modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-			modelMap.addAttribute("editoreInstanceTotal", Editore.count());
-		} else {
-			modelMap.addAttribute("editoreInstanceList", Editore.list());
-			modelMap.addAttribute("editoreInstanceTotal", Editore.count());	
-		}
+		int sizeNo = max == null ? 10 : max.intValue();
+		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo));
+		modelMap.addAttribute("editoreInstanceTotal", Editore.count());
 		return "/editore/list";
 	}
 
@@ -48,13 +38,11 @@ public class EditoreController {
 
 	@RequestMapping(value = "/editore/save.dispatch", method = RequestMethod.POST)
 	public String save(HttpServletRequest request, ModelMap modelMap) {
-		ApplicationContext ctx = ApplicationHolder.getApplication().getMainContext();
-		BeanFactory factory = (BeanFactory) ctx;
-		Editore editore = (Editore)factory.getBean("editore");
+		Editore editore = Editore.create();
 		MyUtils.bindDataFromMap(editore, request);
 		if (!editore.validate()) {
 			modelMap.addAttribute("editoreInstance", editore);
-			return "editore/create";
+			return "/editore/create";
 		}        
 		Long id = editore.save();
 		return "redirect:/editore/" + id + ".dispatch";

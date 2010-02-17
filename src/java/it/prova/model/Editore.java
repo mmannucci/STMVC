@@ -1,44 +1,48 @@
 package it.prova.model;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import it.prova.util.HibernateUtil;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.codehaus.groovy.grails.commons.ApplicationHolder;
+import org.hibernate.Query;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
+@Component 
+@Scope("prototype")
 @Entity
 public class Editore {
 	
 	private Long id;
 	private Long version;
 	
-	@NotNull
-	@Size(min = 1, max = 7, message = "{error.size}")
-	private String nome;
-	
 	@Autowired
 	private Validator validator;
 	
 	@Transient
 	private List<ObjectError> domainErrors;
+	
+	@NotNull
+	@Size(min = 1, max = 7, message = "{error.size}")
+	private String nome;
 	
 	public Editore() {
 		
@@ -51,10 +55,10 @@ public class Editore {
 	@Id
 	@GeneratedValue(generator="hibseq")
 	@GenericGenerator(name="hibseq", strategy = "seqhilo",
-		    parameters = {
-		        @Parameter(name="max_lo", value = "5"),
-		        @Parameter(name="sequence", value="heybabyhey")
-		    }
+		parameters = {
+			@Parameter(name="max_lo", value = "5"),
+			@Parameter(name="sequence", value="heybabyhey")
+		}
 	)
 	public Long getId() {
 		return id;
@@ -73,7 +77,7 @@ public class Editore {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
+	
 	@Column(name = "nome")
 	public String getNome() {
 		return nome;
@@ -94,23 +98,29 @@ public class Editore {
 		return (domainErrors.isEmpty());
 	}
 	
+	public static Editore create(){
+		ApplicationContext ctx = ApplicationHolder.getApplication().getMainContext();
+		return (Editore)ctx.getBean("editore");
+	}
+	
 	public static Editore get(Long id) {
 		return (Editore) HibernateUtil.sessionFactory().getCurrentSession().get(Editore.class, id);
 	}
 	
-	public static Set<Editore> list() {
-		// qui bisogna fare una query...
-		return new HashSet<Editore>();
+	public static List<Editore> list() {
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Editore");
+		return (List<Editore>)q.list();
 	}
 	
-	public static Set<Editore> findAll(int offset, int max) {
-		// qui bisogna fare una query...
-		return new HashSet<Editore>();
+	public static List<Editore> findAll(int offset, int max) {
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Editore");
+		q.setFirstResult(offset);
+		q.setMaxResults(max);
+		return (List<Editore>)q.list();
 	}
 	
-	public static int count() {
-		// qui bisogna fare una query...
-		return 0;
+	public static long count() {
+		return (Long) HibernateUtil.sessionFactory().getCurrentSession().createQuery("select count(*) from Editore").uniqueResult();
 	}
 		
 	public Long save() {
