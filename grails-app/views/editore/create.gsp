@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:stLink class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>

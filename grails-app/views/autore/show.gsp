@@ -62,8 +62,8 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${autoreInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><g:stLink class="edit" controller="editore" action="edit" id="${autoreInstance?.id}"/><g:message code="default.edit.label" args="[entityName]" /></g:stLink></span>
+                    <span class="button"><g:stLink class="delete" controller="editore" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import org.springframework.web.bind.annotation.RequestParam;
+
 @artifact.package@
 import @artifact.classPkg@.@artifact.className@;
 import it.test.MyUtils;
@@ -24,7 +26,8 @@ public class @artifact.name@ {
 	protected SessionFactory sessionFactory;
 
 	@RequestMapping(value = "/@artifact.propertyName@.dispatch", method = RequestMethod.GET)
-	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max, ModelMap modelMap) {
+	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
+			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, ModelMap modelMap) {
 		int sizeNo = max == null ? 10 : max.intValue();
 		modelMap.addAttribute("@artifact.propertyName@InstanceList", @artifact.className@.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo));
 		modelMap.addAttribute("@artifact.propertyName@InstanceTotal", @artifact.className@.count());
@@ -51,7 +54,7 @@ public class @artifact.name@ {
 		return "redirect:/@artifact.propertyName@/" + id + ".dispatch";
 	}
 
-	@RequestMapping(value = "/@artifact.propertyName@/{id}.dispatch", method = RequestMethod.GET)
+	@RequestMapping(value = {"/@artifact.propertyName@/{id}.dispatch", "/@artifact.propertyName@/show/{id}.dispatch"}, method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("@artifact.propertyName@Instance", @artifact.className@.get(id));

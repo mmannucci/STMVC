@@ -23,9 +23,10 @@ public class EditoreController {
 	protected SessionFactory sessionFactory;
 
 	@RequestMapping(value = {"/editore.dispatch", "/editore/list.dispatch"}, method = RequestMethod.GET)
-	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max, ModelMap modelMap) {
+	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
+			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, ModelMap modelMap) {
 		int sizeNo = max == null ? 10 : max.intValue();
-		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo));
+		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo, sort, order));
 		modelMap.addAttribute("editoreInstanceTotal", Editore.count());
 		return "/editore/list";
 	}
@@ -48,7 +49,7 @@ public class EditoreController {
 		return "redirect:/editore/" + id + ".dispatch";
 	}
 
-	@RequestMapping(value = "/editore/{id}.dispatch", method = RequestMethod.GET)
+	@RequestMapping(value = {"/editore/{id}.dispatch", "/editore/show/{id}.dispatch"}, method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));

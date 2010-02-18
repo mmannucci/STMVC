@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create.dispatch"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:stLink class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -40,8 +40,8 @@
                 </table>
             </div>
             <div class="buttons">
-				<a href="edit/${editoreInstance?.id}.dispatch">Edit</a>
-				<a href="delete/${editoreInstance?.id}.dispatch" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">Delete</a>
+				<span class="menuButton"><g:stLink class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></g:stLink></span>
+				<span class="menuButton"><g:stLink class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></g:stLink></span>
             </div>
         </div>
     </body>

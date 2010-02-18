@@ -112,8 +112,14 @@ public class Editore {
 		return (List<Editore>)q.list();
 	}
 	
-	public static List<Editore> findAll(int offset, int max) {
-		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Editore");
+	public static List<Editore> findAll(int offset, int max, String sort, String order) {
+		
+		String sortFragment = "";
+		if (sort != null && order != null) {
+			sortFragment = " order by " + sort + " " + order;
+		}
+		
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Editore" + sortFragment);
 		q.setFirstResult(offset);
 		q.setMaxResults(max);
 		return (List<Editore>)q.list();
