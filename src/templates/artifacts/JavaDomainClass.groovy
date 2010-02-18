@@ -15,8 +15,6 @@ import javax.validation.constraints.Size;
 
 import org.codehaus.groovy.grails.commons.ApplicationHolder;
 import org.hibernate.Query;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -49,13 +47,7 @@ public class @artifact.name@ {
 	}
 	
 	@Id
-	@GeneratedValue(generator="hibseq")
-	@GenericGenerator(name="hibseq", strategy = "seqhilo",
-		parameters = {
-			@Parameter(name="max_lo", value = "5"),
-			@Parameter(name="sequence", value="heybabyhey")
-		}
-	)
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
