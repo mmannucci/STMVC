@@ -76,7 +76,7 @@ public class @artifact.name@ {
 		MyUtils.bindDataFromMap(@artifact.propertyName@, request);
 		if (!@artifact.propertyName@.validate()) {
 			modelMap.addAttribute("@artifact.propertyName@Instance", @artifact.propertyName@);
-			return "/@artifact.propertyName@/update";
+			return "/@artifact.propertyName@/edit";
 		}
 		@artifact.propertyName@.update();
 		return "redirect:/@artifact.propertyName@/" + @artifact.propertyName@.getId() + ".dispatch";

@@ -71,7 +71,7 @@ public class EditoreController {
 		MyUtils.bindDataFromMap(editore, request);
 		if (!editore.validate()) {
 			modelMap.addAttribute("editoreInstance", editore);
-			return "/editore/update";
+			return "/editore/edit";
 		}
 		editore.update();
 		return "redirect:/editore/" + editore.getId() + ".dispatch";
