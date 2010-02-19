@@ -22,4 +22,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>hibernate-1.2.0-grails-app-i18n</name>
+			<type>2</type>
+			<location>/Users/macbookpro/.grails/1.2.0/projects/ProvaSpringMVCGrails/plugins/hibernate-1.2.0/grails-app/i18n</location>
+		</link>
+		<link>
+			<name>tomcat-1.2.0-src-groovy</name>
+			<type>2</type>
+			<location>/Users/macbookpro/.grails/1.2.0/projects/ProvaSpringMVCGrails/plugins/tomcat-1.2.0/src/groovy</location>
+		</link>
+	</linkedResources>
 </projectDescription>

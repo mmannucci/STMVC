@@ -15,14 +15,11 @@
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-            <g:if test="\${flash.message}">
-            <div class="message">\${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="\${${propertyName}}">
+           <g:stHasErrors bean="\${${propertyName}}">
             <div class="errors">
-                <g:renderErrors bean="\${${propertyName}}" as="list" />
+                  <g:beanErrors bean="\${${propertyName}}" />
             </div>
-            </g:hasErrors>
+            </g:stHasErrors>
             <g:form method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
                 <g:hiddenField name="id" value="\${${propertyName}?.id}" />
                 <g:hiddenField name="version" value="\${${propertyName}?.version}" />
@@ -40,7 +37,7 @@
                                 <td valign="top" class="name">
                                   <label for="${p.name}"><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></label>
                                 </td>
-                                <td valign="top" class="value \${hasErrors(bean: ${propertyName}, field: '${p.name}', 'errors')}">
+                                <td valign="top" class="value \${hasPropertyError(bean: ${propertyName}, beanProperty '${p.name}')}">
                                     ${renderEditor(p)}
                                 </td>
                             </tr>

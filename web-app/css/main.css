@@ -124,10 +124,10 @@ div.errors li {
 }
 
 td.errors select {
-    border: 1px solid red;
+    border: 3px solid red;
 }
 td.errors input {
-    border: 1px solid red;
+    border: 3px solid red;
 }
 
 /* TABLES */
