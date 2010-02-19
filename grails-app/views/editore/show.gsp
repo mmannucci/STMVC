@@ -19,6 +19,10 @@
             <div class="message">${flash.message}</div>
             </g:if>
             <div class="dialog">
+            <g:if test="${!editoreInstance}">
+            	<g:message code="default.not.found.message" args="[entityName, ]"/>
+        	</g:if>
+        	<g:if test="${editoreInstance}">
                 <table>
                     <tbody>
                     
@@ -38,11 +42,14 @@
                     
                     </tbody>
                 </table>
+            </g:if>
             </div>
-            <div class="buttons">
-				<span class="menuButton"><g:stLink class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></g:stLink></span>
-				<span class="menuButton"><g:stLink class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></g:stLink></span>
-            </div>
+            <g:if test="${editoreInstance}">
+            	<div class="buttons">
+					<span class="menuButton"><g:stLink class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></g:stLink></span>
+					<span class="menuButton"><g:stLink class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></g:stLink></span>
+            	</div>
+            </g:if>
         </div>
     </body>
 </html>

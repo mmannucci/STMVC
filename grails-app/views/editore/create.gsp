@@ -17,11 +17,7 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${editoreInstance}">
-            <div class="errors">
-                <g:renderErrors bean="${editoreInstance}" as="list" />
-            </div>
-            </g:hasErrors>
+            <g:beanErrors bean="${editoreInstance}" />
             <form action="save.dispatch" method="post" >
                 <div class="dialog">
                     <table>
