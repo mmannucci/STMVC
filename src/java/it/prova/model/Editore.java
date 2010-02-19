@@ -2,6 +2,7 @@ package it.prova.model;
 
 import it.prova.util.HibernateUtil;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
