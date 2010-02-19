@@ -24,7 +24,7 @@ class BeanErrorsTagLib {
 		
 		
 		def mybean = attrs.bean
-		System.out.println("...xx" + mybean);
+		//System.out.println("...xx" + mybean);
 		if (mybean.domainErrors && !mybean.domainErrors.isEmpty()){
 			out << body()
 		}
