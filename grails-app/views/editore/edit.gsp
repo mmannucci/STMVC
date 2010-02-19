@@ -15,10 +15,11 @@
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-            </g:if>
-            <g:beanErrors bean="${editoreInstance}" />
+          <g:stHasErrors bean="${editoreInstance}">
+            <div class="errors">
+                <g:beanErrors bean="${editoreInstance}" />
+            </div>
+            </g:stHasErrors>
             <g:form controller="editore" action="update.dispatch" method="POST" >
                 <g:hiddenField name="id" value="${editoreInstance?.id}" />
                 <g:hiddenField name="version" value="${editoreInstance?.version}" />

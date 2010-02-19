@@ -14,20 +14,11 @@
         </div>
         <div class="body">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
-<<<<<<< HEAD
-           
             <g:stHasErrors bean="${editoreInstance}">
-            
             <div class="errors">
                 <g:beanErrors bean="${editoreInstance}" />
             </div>
             </g:stHasErrors>
-=======
-            <g:if test="${flash.message}">
-            <div class="message">${flash.message}</div>
-            </g:if>
-            <g:beanErrors bean="${editoreInstance}" />
->>>>>>> 0ec5a4627f86732af6e3be9c58f61e35c8e986f0
             <form action="save.dispatch" method="post" >
                 <div class="dialog">
                     <table>
