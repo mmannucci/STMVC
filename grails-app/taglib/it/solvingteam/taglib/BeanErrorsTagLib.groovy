@@ -1,10 +1,16 @@
 package it.solvingteam.taglib
 
-class BeanErrorsTagLib {
+import groovy.xml.MarkupBuilder;
+
+import org.codehaus.groovy.grails.plugins.web.taglib.ValidationTagLib;
+
+
+class BeanErrorsTagLib extends ValidationTagLib{
 	
 	def beanErrors ={ attrs ->
 		
 		def mybean = attrs.bean
+		
 			//System.out.println("dentro taglib2:" + mybean.customErrors);
 			def codec = attrs.codec ?: 'HTML'
 			if (codec=='none') codec = ''
