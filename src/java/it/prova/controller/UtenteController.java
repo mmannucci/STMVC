@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class UtenteController extends BaseController{
+public class UtenteController {
 	
+	@Autowired
+	protected SessionFactory sessionFactory;
 	
 	@RequestMapping("/checkUtente/{id}.dispatch")
 	public ModelAndView indifferente(@PathVariable Long id) throws IOException, ResourceException, ScriptException {
