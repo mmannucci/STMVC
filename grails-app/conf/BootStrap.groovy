@@ -1,4 +1,4 @@
-import it.prova.Persona;
+
 import it.prova.model.Autore;
 import it.prova.model.Libro;
 import it.prova.model.Utente;
@@ -7,10 +7,7 @@ class BootStrap {
 	
 	def init = { servletContext ->
 		
-		
-		new Persona(nome:"peppe",cognome:"rossi").save()
-		new Persona(nome:"ciccio",cognome:"bianchi").save()
-		new Persona(nome:"rocco",cognome:"barocco").save()
+
 		
 		new Utente(login:"m",password:"m",nome:"marcus",cognome:"dei").save()
 		
