@@ -7,7 +7,6 @@ import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
-import it.prova.Persona;
 import it.prova.model.Utente;
 import it.prova.model.UtenteQuery;
 
