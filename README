@@ -1,0 +1,73 @@
+	STMVC 0.1
+
+	Solving Team srl - www.solvingteam.it
+
+	1.INTRODUCTION
+
+	This application is an attempt to build a pure java framework on top of
+	the groovy-based Grails web application framework. Purpose of this
+	framework is to leverage Grails facilities and ease of use, while
+	maintaining compatibility with all the java tools out there.
+
+
+	2.SOFTWARE REQUIREMENTS
+
+	In order to use STMVC, you should have Grails 1.2 > installed on your
+	system. Since you are going to customize this installation, we recommend
+	to have a dedicated installation of Grails for evaluation purposes.
+
+ 
+	3.INSTALLATION
+
+	3.1.Scripts installation
+
+	The following script files are listed under /scripts directory of the
+	repository
+
+	       - _GrailsCreateArtifacts.groovy
+	       - CreateJavaController.groovy
+	       - CreateJavaDomainController.groovy
+
+	The _GrailsCreateArtifacts.groovy is a custom version of the standard
+	Grails' _GrailsCreateArtifacts.groovy script. You should put it in your
+	$GRAILS_HOME/scripts directory thus overwriting the standard one (even
+	if we guarantee backward compatibility with standard grails behavior,
+	create a backup first). CreateJavaController.groovy and
+	CreateJavaDomainClass.groovy may be put in either $GRAILS_HOME/scripts
+	or your specific $GRAILS_PROJECT_ROOT/scripts directory.
+
+	3.2.Templates installation
+
+	The following template files are listed under /src/template/artifacts
+	directory of the repository
+
+	       - JavaController.groovy
+	       - JavaDomainController.groovy
+
+	These files may be put in either
+	$GRAILS_HOME/src/grails/templates/artifacts or your specific
+	$GRAILS_PROJECT_ROOT/src/templates/artifacts directory.
+
+
+	4.USAGE
+	
+	STMVC is intended to be used the same way Grails is. The only difference
+	relies in that you can now create full-fledged JPA compliant java domain
+	classes and plain annotated java Spring MVC Controllers for your web
+	application. In order to do that, Grails standard script set has been
+	augmented with these two new scripts
+
+	      -grails create-java-domain-class foo.bar.EntityName
+	      -grails create-java-controller foo.bar.EntityName
+
+	In this version of STMVC, a java controller for foo.bar.EntityName will
+	be created in the package foo.controller with the name
+	EntityController. We encourage than to use a naming convention for which
+	entities reside in a package like foo.model, in order to have the
+	following structure
+
+		  foo
+		   |
+		   +-model
+		   |
+		   +-controller
