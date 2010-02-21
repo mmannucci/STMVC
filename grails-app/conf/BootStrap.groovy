@@ -2,6 +2,8 @@
 import it.prova.model.Autore;
 import it.prova.model.Libro;
 import it.prova.model.Utente;
+import org.codehaus.groovy.grails.commons.GrailsApplication;
+import org.codehaus.groovy.grails.commons.spring.GrailsApplicationContext;
 
 class BootStrap {
 	
@@ -17,6 +19,8 @@ class BootStrap {
 		new Libro(titolo:"ciao sumeri",autore:a2,pagine:5).save()
 		Libro l2=new Libro(titolo:"secondo libro",pagine:6)
 		a2.addToLibros(l2)
+		
+		
 		
 	}
 	def destroy = {

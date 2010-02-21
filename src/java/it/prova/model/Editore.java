@@ -81,7 +81,7 @@ public class Editore {
 	}
 	
 	public String toString() {
-		return "Editore:" + id;
+		return "Editore:" + id;  
 	}
 	
 	public boolean validate() {

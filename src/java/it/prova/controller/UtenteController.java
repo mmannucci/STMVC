@@ -10,7 +10,10 @@ import groovy.util.ScriptException;
 import it.prova.model.Utente;
 import it.prova.model.UtenteQuery;
 
+import org.codehaus.groovy.grails.commons.ControllerArtefactHandler;
 import org.codehaus.groovy.grails.commons.DefaultGrailsApplication;
+import org.codehaus.groovy.grails.commons.GrailsControllerClass;
+import org.codehaus.groovy.grails.commons.spring.GrailsApplicationContext;
 import org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsHibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,13 +33,15 @@ public class UtenteController {
 	@RequestMapping("/checkUtente.dispatch")
 	public String login(Utente u) {
 		
+		
+		
 		Utente ux = UtenteQuery.findByLoginAndPwd(u.getLogin(), u.getPassword());
 		
 		if(ux != null){
-			return "forward:/editore.dispatch";
+			return "forward:/editore/list.dispatch";
 		}
 		
 		return "redirect:/";
 	}
-
+ 
 }

@@ -91,14 +91,13 @@
 	        content you may choose. Below is a list of controllers that are currently deployed in this application,
 	        click on each to execute its default action:</p>
 
-	        <div id="controllerList" class="dialog">
-				<h2>Available Controllers:</h2>
-	            <ul>
-	              <g:each var="c" in="${grailsApplication.controllerClasses}">
-	                    <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-	              </g:each>
-	            </ul>
-	        </div>
 		</div>
+<div align="center">		
+	<form action="/ProvaSpringMVCGrails/checkUtente.dispatch">
+	<div>login</div><div><input type="text" name="login" value="m" /></div><br />
+	<div>password</div><div><input type="text" name="password" value="m"/></div> <br/>
+	<input type="submit" value="GO">
+	</form>
+</div>	
     </body>
 </html>

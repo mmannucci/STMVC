@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="\${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:stLink class="list" controller="${domainClass.shortName.toLowerCase()}" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -52,8 +52,8 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="\${${propertyName}?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="\${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('\${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><g:actionSubmit class="edit" controller="${domainClass.shortName.toLowerCase()}" action="edit" value="\${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" controller="${domainClass.shortName.toLowerCase()}" action="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('\${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
             </div>
         </div>

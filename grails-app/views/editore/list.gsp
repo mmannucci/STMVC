@@ -10,19 +10,19 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="create" controller="editore" action="create.dispatch"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            xx<span class="menuButton"><g:stLink class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-          
+           
             <div class="list">
                 <table>
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
+                            <g:stSortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
                         
-                            <g:sortableColumn property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
+                            <g:stSortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
                         
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@
                     <g:each in="${editoreInstanceList}" status="i" var="editoreInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:stLink action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</g:stLink></td>
+                            <td><g:stLink controller="editore" action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</g:stLink></td>
                         
                             <td>${fieldValue(bean: editoreInstance, field: "nome")}</td>
                         

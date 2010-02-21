@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class EditoreController {
 
 	@RequestMapping(value = "/editore/create.dispatch", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
+		//System.out.println("....dentro create##################");
 		modelMap.addAttribute("editoreInstance", new Editore());
 		return "/editore/create";
 	}
@@ -58,6 +60,7 @@ public class EditoreController {
 
 	@RequestMapping(value = "/editore/edit/{id}.dispatch", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") Long id, ModelMap modelMap) {
+		System.out.println(".....dentro edit........................");
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));
 		return "/editore/edit";

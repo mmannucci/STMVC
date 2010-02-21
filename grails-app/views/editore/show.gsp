@@ -10,17 +10,13 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="list" controller="editore" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-           
+            
             <div class="dialog">
-            <g:if test="${!editoreInstance}">
-            	<g:message code="default.not.found.message" args="[entityName, ]"/>
-        	</g:if>
-        	<g:if test="${editoreInstance}">
                 <table>
                     <tbody>
                     
@@ -40,14 +36,14 @@
                     
                     </tbody>
                 </table>
-            </g:if>
             </div>
-            <g:if test="${editoreInstance}">
-            	<div class="buttons">
-					<span class="menuButton"><g:stLink class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></g:stLink></span>
-					<span class="menuButton"><g:stLink class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></g:stLink></span>
-            	</div>
-            </g:if>
+            <div class="buttons">
+                <g:form>
+                    <g:hiddenField name="id" value="${editoreInstance?.id}" />
+                    <span class="button"><g:actionSubmit class="edit" controller="editore" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" controller="editore" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </g:form>
+            </div>
         </div>
     </body>
 </html>
