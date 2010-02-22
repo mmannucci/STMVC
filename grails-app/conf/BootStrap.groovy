@@ -20,6 +20,8 @@ class BootStrap {
 		Libro l2=new Libro(titolo:"secondo libro",pagine:6)
 		a2.addToLibros(l2)
 		
+		10.times {new it.prova.model.Editore(nome:'a'+it).save()}
+		
 		
 		
 	}

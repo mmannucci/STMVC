@@ -43,7 +43,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${editoreInstanceTotal}" />
+                <g:paginate total="${editoreInstanceTotal}" controller="editore" action="list.dispatch"/>
             </div>
         </div>
     </body>

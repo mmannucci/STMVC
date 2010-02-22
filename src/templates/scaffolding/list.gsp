@@ -52,7 +52,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="\${${propertyName}Total}" />
+                <g:paginate total="\${${propertyName}Total}" controller="${domainClass.shortName.toLowerCase()}" action="list.dispatch"/>
             </div>
         </div>
     </body>
