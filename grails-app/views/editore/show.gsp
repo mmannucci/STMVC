@@ -15,12 +15,8 @@
         </div>
         <div class="body">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-           
+            
             <div class="dialog">
-            <g:if test="${!editoreInstance}">
-            	<g:message code="default.not.found.message" args="[entityName, ]"/>
-        	</g:if>
-        	<g:if test="${editoreInstance}">
                 <table>
                     <tbody>
                     
@@ -40,7 +36,6 @@
                     
                     </tbody>
                 </table>
-            </g:if>
             </div>
             <g:if test="${editoreInstance}">
             	<div class="buttons">

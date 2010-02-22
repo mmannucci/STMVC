@@ -14,12 +14,13 @@
         </div>
         <div class="body">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+          
             <g:stHasErrors bean="${editoreInstance}">
             <div class="errors">
-                <g:beanErrors bean="${editoreInstance}" />
+                  <g:beanErrors bean="${editoreInstance}" />
             </div>
             </g:stHasErrors>
-            <form action="save.dispatch" method="post" >
+            <g:form controller="editore" action="save.dispatch" method="post" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -28,9 +29,11 @@
                                 <td valign="top" class="name">
                                     <label for="nome"><g:message code="editore.nome.label" default="Nome" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty:'nome')}">
+                                 <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty :'nome')}">
                                     <g:textField name="nome" value="${editoreInstance?.nome}" />
                                 </td>
+                                
+                                
                             </tr>
                         
                         </tbody>
@@ -39,7 +42,7 @@
                 <div class="buttons">
                     <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
                 </div>
-            </form>
+            </g:form>
         </div>
     </body>
 </html>

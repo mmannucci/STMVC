@@ -10,17 +10,22 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+<<<<<<< HEAD
             <span class="menuButton"><st:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
             <span class="menuButton"><st:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
+=======
+            <span class="menuButton"><g:stLink class="create" controller="editore" action="list""><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="editore" action="create""><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+>>>>>>> 3b858abb4f73974608f62af03b75655b392f4a61
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-          <g:stHasErrors bean="${editoreInstance}">
+           <g:stHasErrors bean="${editoreInstance}">
             <div class="errors">
-                <g:beanErrors bean="${editoreInstance}" />
+                  <g:beanErrors bean="${editoreInstance}" />
             </div>
             </g:stHasErrors>
-            <g:form controller="editore" action="update.dispatch" method="POST" >
+            <g:form controller="editore" action="update.dispatch" method="post" >
                 <g:hiddenField name="id" value="${editoreInstance?.id}" />
                 <g:hiddenField name="version" value="${editoreInstance?.version}" />
                 <div class="dialog">
@@ -31,7 +36,7 @@
                                 <td valign="top" class="name">
                                   <label for="nome"><g:message code="editore.nome.label" default="Nome" /></label>
                                 </td>
-                               <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty:'nome')}">
+                                <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty 'nome')}">
                                     <g:textField name="nome" value="${editoreInstance?.nome}" />
                                 </td>
                             </tr>

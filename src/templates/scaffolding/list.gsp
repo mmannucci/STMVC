@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="\${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -27,7 +27,7 @@
                                     if (p.isAssociation()) { %>
                             <th><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></th>
                    	    <%      } else { %>
-                            <g:sortableColumn property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}" />
+                            <g:stSortableColumn controller="${domainClass.shortName.toLowerCase()}" property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}" />
                         <%  }   }   } %>
                         </tr>
                     </thead>
@@ -37,7 +37,7 @@
                         <%  props.eachWithIndex { p, i ->
                                 cp = domainClass.constrainedProperties[p.name]
                                 if (i == 0) { %>
-                            <td><g:link action="show" id="\${${propertyName}.id}">\${fieldValue(bean: ${propertyName}, field: "${p.name}")}</g:link></td>
+                            <td><g:stLink controller="${domainClass.shortName.toLowerCase()}" action="show" id="\${${propertyName}.id}">\${fieldValue(bean: ${propertyName}, field: "${p.name}")}</g:stLink></td>
                         <%      } else if (i < 6) {
                                     if (p.type == Boolean.class || p.type == boolean.class) { %>
                             <td><g:formatBoolean boolean="\${${propertyName}.${p.name}}" /></td>
@@ -52,7 +52,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="\${${propertyName}Total}" />
+                <g:paginate total="\${${propertyName}Total}" controller="${domainClass.shortName.toLowerCase()}" action="list.dispatch"/>
             </div>
         </div>
     </body>

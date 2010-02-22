@@ -31,7 +31,7 @@ import org.springframework.validation.Validator;
 public class Editore {
 	
 	private Long id;
-	private Long version;
+	private Long version;   
 	
 	@Autowired
 	private Validator validator;
@@ -81,7 +81,7 @@ public class Editore {
 	}
 	
 	public String toString() {
-		return "Editore:" + id;
+		return "Editore:" + id;  
 	}
 	
 	public boolean validate() {
