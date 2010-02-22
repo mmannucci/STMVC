@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><st:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -44,8 +44,12 @@
             </div>
             <g:if test="${editoreInstance}">
             	<div class="buttons">
-					<span class="menuButton"><g:stLink class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></g:stLink></span>
-					<span class="menuButton"><g:stLink class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></g:stLink></span>
+					<span class="menuButton"><st:link class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></st:link></span>
+					<span class="menuButton"><st:link class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></st:link></span>
+					<g:form>
+					<g:hiddenField name="id" value="${editoreInstance?.id}"/>
+					<g:actionSubmit value="Delete" action="delete.dispatch" />
+					</g:form>
             	</div>
             </g:if>
         </div>
