@@ -15,8 +15,10 @@ class BootStrap {
 		
 		new Utente(login:"m",password:"m",nome:"marcus",cognome:"dei").save()
 		
-		Autore a1=new Autore(nome:"marco",cognome:"mannux").save()
-		Autore a2=new Autore(nome:"alberto",cognome:"multarix").save()
+		Autore a1=new Autore(nome:"marco",cognome:"mannux")
+		a1.save()
+		Autore a2=new Autore(nome:"alberto",cognome:"multarix")
+		a2.save()
 		
 		new Libro(titolo:"ciao sumeri",autore:a2,pagine:5).save()
 		Libro l2=new Libro(titolo:"secondo libro",pagine:6)

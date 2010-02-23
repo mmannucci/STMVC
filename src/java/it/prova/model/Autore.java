@@ -2,29 +2,35 @@ package it.prova.model;
 
 import it.prova.util.HibernateUtil;
 
-import java.util.Date;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.codehaus.groovy.grails.commons.ApplicationHolder;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
-//commento test
+import java.util.*;
+
+@Component 
+@Scope("prototype")
 @Entity
 public class Autore {
 
@@ -40,9 +46,7 @@ public class Autore {
 	@NotNull
 	@Size(min = 1, max = 7, message = "{error.size}")
 	private String nome;
-
 	private String cognome;
-
 	private Date date;
 	private Set<Libro> libros = new HashSet<Libro>(0);
 
@@ -113,37 +117,58 @@ public class Autore {
 
 	public String toString() {
 
-		return "Nome:" + nome + "....size libros:" + libros.size();
+		return "Nome:" + nome;
 	}
 
 	public boolean validate() {
-		
-		System.out
-				.println("...............validate di Autore xx...................");
 		BindingResult errors = new BeanPropertyBindingResult(this, "autore");
 		validator.validate(this, errors);
-		
-		//errors.rejectValue("nome", "error.nome", "msgdefault");
-		//errors.rejectValue("nome", "error.nome");
-		//System.out.println(errors.getMessage());
 		domainErrors = errors.getAllErrors();
-		System.out.println("errors:" + domainErrors);
-		for (ObjectError e : domainErrors) {
-			System.out.println("getDefaultMessage:" + e.getDefaultMessage());
-			System.out.println("getCode:" + e.getCode());
-
-			// System.out.println("errore:" + e.);
-		}
-
 		return (domainErrors.isEmpty());
 
 	}
 
+	public static Autore create(){
+		ApplicationContext ctx = ApplicationHolder.getApplication().getMainContext();
+		return (Autore)ctx.getBean("autore");
+	}
+	
 	public static Autore get(Long id) {
-		// System.out.println("...HibernateUtil.sessionFactory():" +
-		// HibernateUtil.sessionFactory());
-		return (Autore) HibernateUtil.sessionFactory().getCurrentSession().get(
-				Autore.class, id);
+		return (Autore) HibernateUtil.sessionFactory().getCurrentSession().get(Autore.class, id);
+	}
+	
+	public static List<Editore> list() {
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Autore");
+		return (List<Editore>)q.list();
+	}
+	
+	public static List<Editore> findAll(int offset, int max, String sort, String order) {
+		
+		String sortFragment = "";
+		if (sort != null && order != null) {
+			sortFragment = " order by " + sort + " " + order;
+		}
+		
+		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Autore" + sortFragment);
+		q.setFirstResult(offset);
+		q.setMaxResults(max);
+		return (List<Editore>)q.list();
+	}
+	
+	public static long count() {
+		return (Long) HibernateUtil.sessionFactory().getCurrentSession().createQuery("select count(*) from Autore").uniqueResult();
+	}
+		
+	public Long save() {
+		return (Long) HibernateUtil.sessionFactory().getCurrentSession().save(this);
+	}
+	
+	public Editore update() {
+		return (Editore) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
+	}
+	
+	public void delete() {
+		HibernateUtil.sessionFactory().getCurrentSession().delete(this);
 	}
 
 }

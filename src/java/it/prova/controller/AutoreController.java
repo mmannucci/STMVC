@@ -1,5 +1,6 @@
 package it.prova.controller;
 
+
 import it.prova.model.Autore;
 import it.test.MyUtils;
 
@@ -7,82 +8,94 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Controller("AutoreController")
+@RequestMapping(value="/autore")
 public class AutoreController {
 
 	@Autowired
 	protected SessionFactory sessionFactory;
 
-	/*
-	 * @RequestMapping("/updateUtente.dispatch") public String
-	 * update(@RequestParam("id") Long id,Autore aut,BindingResult
-	 * b,HttpServletRequest request) {
-	 * System.out.println("................ingresso");
-	 * System.out.println(".................size:"+aut.getLibros().size());
-	 * 
-	 * //TODO: capire il comportamento del bindingresult if(b.hasErrors()){
-	 * System.out.println("............errori:"+b.getErrorCount()); }
-	 * 
-	 * 
-	 * Session s = sessionFactory.getCurrentSession();
-	 * System.out.println("...............aggiorna"); //Autore autorePers =
-	 * (Autore) s.get(Autore.class, id); s.merge(aut);
-	 * 
-	 * return "redirect:autore"; }
-	 */
-
-	@RequestMapping("/updateUtente.dispatch")
-	public ModelAndView update(@RequestParam("id") Long id,
-			HttpServletRequest request) {
-
-		// Autore a = new Autore(id);
-		// Session s = sessionFactory.getCurrentSession();
-		// Autore a = (Autore)s.get(Autore.class, id);
-		// BindingResult res = DataBindingUtils.bindObjectToInstance(a,
-		// request);
-		Autore a = Autore.get(1L);
-		MyUtils.bindDataFromMap(a, request);
-		a.validate();
-
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/autore/edit");
-		mv.addObject("autoreInstance", a);
-		return mv;
-		// s.merge(a);
-		// return "redirect:autore";
+	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
+			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, HttpServletRequest request, ModelMap modelMap) {
+		int sizeNo = max == null ? 10 : max.intValue();
+		modelMap.addAttribute("autoreInstanceList", Autore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo, sort, order));
+		modelMap.addAttribute("autoreInstanceTotal", Autore.count());
+		
+		return "/autore/list";
 	}
 
-	/*
-	 * @RequestMapping("/updateUtente.dispatch") public String update(Autore
-	 * a,HttpServletRequest request) { //Autore a = new Autore(id); Session s =
-	 * sessionFactory.getCurrentSession(); //Autore a =
-	 * (Autore)s.get(Autore.class, id); //BindingResult res =
-	 * DataBindingUtils.bindObjectToInstance(a, request);
-	 * //System.out.println("....second version"); //System.out.println("....."
-	 * + res);
-	 * 
-	 * //System.out.println("...autore2:" + a);
-	 * 
-	 * System.out.println("...............aggiorna");
-	 * it.test.MyUtils.bindDataFromMap(a, request); /*ValidatorFactory factory =
-	 * Validation.buildDefaultValidatorFactory(); Validator validator =
-	 * factory.getValidator();
-	 * 
-	 * Set<ConstraintViolation<Autore>> constraintViolations
-	 * =validator.validate(a);
-	 * System.out.println("...............set violation:" +
-	 * constraintViolations);
-	 * System.out.println("...............set violationnnnnnn:" + a.validate());
-	 * s.merge(a); return "redirect:autore"; }
-	 */
-	/*
-	 * @InitBinder public void initBinder(WebDataBinder binder) {
-	 * System.out.println("nell'init binder "); super.initBinder(binder); }
-	 */
 
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String create(ModelMap modelMap) {
+		modelMap.addAttribute("autoreInstance", new Autore());
+		return "/autore/create";
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(HttpServletRequest request, ModelMap modelMap) {
+		Autore autore = Autore.create();
+		MyUtils.bindDataFromMap(autore, request);
+		if (!autore.validate()) {
+			modelMap.addAttribute("autoreInstance", autore);
+			return "/autore/create";
+		}        
+		Long id = autore.save();
+
+		return "redirect:/autore/" + id + ".dispatch";
+	}
+
+	@RequestMapping(value = {"/{id}.dispatch", "/show/{id}.dispatch"}, method = RequestMethod.GET)
+	public String show(@PathVariable("id") Long id, ModelMap modelMap) {
+		if (id == null) throw new IllegalArgumentException("An Identifier is required");
+		modelMap.addAttribute("autoreInstance", Autore.get(id));
+		return "/autore/show";
+	}
+
+
+	
+	@RequestMapping(value = "/edit", params="edit",method = RequestMethod.POST)
+	public String edit(@RequestParam("id") Long id, ModelMap modelMap) {
+		if (id == null) throw new IllegalArgumentException("An Identifier is required");
+		modelMap.addAttribute("autoreInstance", Autore.get(id));
+		return "/autore/edit";
+	}
+	
+	@RequestMapping(value = "/update", params="update",method = RequestMethod.POST)
+	public String update(@RequestParam("id") Long id, HttpServletRequest request, ModelMap modelMap) {
+		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, "autore");
+		Autore autore = Autore.get(id);
+		if (autore == null) throw new IllegalArgumentException("A autore is required");
+		MyUtils.bindDataFromMap(autore, request);
+		if (!autore.validate()) {
+			modelMap.addAttribute("autoreInstance", autore);
+			return "/autore/edit";
+		}
+		autore.update();
+		return "redirect:/autore/" + autore.getId() + ".dispatch";
+	}
+	
+	//Usato sia in show.gsp che in edit.gsp
+	@RequestMapping(params="delete",method = RequestMethod.POST)
+	public String delete(@RequestParam("id") Long id) {
+		if (id == null) throw new IllegalArgumentException("An Identifier is required");
+		Autore.get(id).delete();
+		return "redirect:/autore/list.dispatch";
+	}
+	
+	@RequestMapping(params="undo",method = RequestMethod.POST)
+	public String undo() {
+		return "redirect:/autore/list.dispatch";
+	}
+	
+	
+	
 }

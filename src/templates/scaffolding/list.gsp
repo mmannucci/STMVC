@@ -27,7 +27,7 @@
                                     if (p.isAssociation()) { %>
                             <th><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></th>
                    	    <%      } else { %>
-                            <g:stSortableColumn controller="${domainClass.shortName.toLowerCase()}" property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}" />
+                            <st:sortableColumn controller="${domainClass.shortName.toLowerCase()}" property="${p.name}" title="\${message(code: '${domainClass.propertyName}.${p.name}.label', default: '${p.naturalName}')}" />
                         <%  }   }   } %>
                         </tr>
                     </thead>

@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="\${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><st:link class="create" controller="${domainClass.shortName.toLowerCase()}" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="create" controller="${domainClass.shortName.toLowerCase()}" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -46,8 +46,11 @@
                     </table>
                 </div>
                 <div class="buttons">
-                    <span class="button"><g:actionSubmit class="save" controller="${domainClass.shortName.toLowerCase()}" action="update" value="\${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" controller="${domainClass.shortName.toLowerCase()}" action="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('\${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                  	<span class="button"><input type="submit" name=update value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+                    <span class="button"><input type="submit" name="undo" value="${message(code: 'default.button.undo.label', default: 'Undo')}"/></span>
+                  	<span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+                 
+                
                 </div>
             </g:form>
         </div>

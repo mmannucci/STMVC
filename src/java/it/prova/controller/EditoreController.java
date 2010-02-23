@@ -26,8 +26,6 @@ public class EditoreController {
 	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
 			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, HttpServletRequest request, ModelMap modelMap) {
-		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, "editore");
-		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.ACTION_NAME_ATTRIBUTE, "list.dispatch");
 		int sizeNo = max == null ? 10 : max.intValue();
 		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo, sort, order));
 		modelMap.addAttribute("editoreInstanceTotal", Editore.count());
@@ -44,7 +42,6 @@ public class EditoreController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(HttpServletRequest request, ModelMap modelMap) {
-		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, "editore");
 		Editore editore = Editore.create();
 		MyUtils.bindDataFromMap(editore, request);
 		if (!editore.validate()) {
