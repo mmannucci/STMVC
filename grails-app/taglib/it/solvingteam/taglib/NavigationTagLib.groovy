@@ -25,11 +25,11 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 
 
 class NavigationTagLib extends ApplicationTagLib {
-	
-	def stLink = { attrs, body ->
+	static namespace = 'st'
+	def link = { attrs, body ->
 		def writer = getOut()
 		def elementId = attrs.remove('elementId')
-		writer <<  "<a href=\"${createStLink(attrs).encodeAsHTML()}\""
+		writer <<  "<a href=\"${createLink(attrs).encodeAsHTML()}\""
 		if(elementId) {
 			writer << " id=\"${elementId}\""
 		}
@@ -38,7 +38,7 @@ class NavigationTagLib extends ApplicationTagLib {
 		writer << "${body()}</a>"
 	}
 	
-	def createStLink = { attrs ->
+	def createLink = { attrs ->
 		def writer = getOut()
 		// prefer URI attribute
 		if(attrs['uri']) {
