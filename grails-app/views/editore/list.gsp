@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><st:link class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -21,9 +21,9 @@
                         <tr>
 
                         
-                            <g:stSortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
+                            <st:sortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
                         
-                            <g:stSortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
+                            <st:sortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
 
                         </tr>
                     </thead>

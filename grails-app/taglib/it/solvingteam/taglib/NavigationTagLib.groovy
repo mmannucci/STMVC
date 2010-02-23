@@ -112,7 +112,7 @@ class NavigationTagLib extends ApplicationTagLib {
 		}
 	}
 	
-	def stSortableColumn = { attrs ->
+	def sortableColumn = { attrs ->
 		//System.out.println("..................................dentro stSortableColumn:" + attrs);
 		def writer = out
 		if(!attrs.property)

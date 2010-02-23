@@ -11,8 +11,8 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
 
-            <span class="menuButton"><g:stLink class="create" controller="editore" action="list""><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" controller="editore" action="create""><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><st:link class="create" controller="editore" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
 
         </div>
         <div class="body">
