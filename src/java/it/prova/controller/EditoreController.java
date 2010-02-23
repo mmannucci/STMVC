@@ -6,6 +6,8 @@ import it.test.MyUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller("EditoreController")
 @RequestMapping(value="/editore")
 public class EditoreController {
+	
+	
+
 
 	@Autowired
 	protected SessionFactory sessionFactory;

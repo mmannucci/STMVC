@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><st:link class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -31,7 +31,7 @@
                     <g:each in="${editoreInstanceList}" status="i" var="editoreInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><st:link action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</st:link></td>
+                            <td><st:link controller="editore" action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</st:link></td>
                         
                             <td>${fieldValue(bean: editoreInstance, field: "nome")}</td>
                         

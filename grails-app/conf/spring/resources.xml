@@ -25,7 +25,7 @@
        
 <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
-
+ <aop:aspectj-autoproxy/>
 
 
 </beans>
