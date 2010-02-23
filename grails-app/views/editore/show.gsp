@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
             </div>
-<<<<<<< HEAD
+
             <div class="buttons">
                 <g:form  controller="editore" action="edit.dispatch" method="POST">
                     <g:hiddenField name="id" value="${editoreInstance?.id}" />
@@ -45,18 +45,7 @@
                     <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                 </g:form>
             </div>
-=======
-            <g:if test="${editoreInstance}">
-            	<div class="buttons">
-					<span class="menuButton"><st:link class="edit" action="edit" id="${editoreInstance?.id}"><g:message code="default.edit.label" args="[entityName]"/></st:link></span>
-					<span class="menuButton"><st:link class="delete" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><g:message code="default.delete.label" args="[entityName]"/></st:link></span>
-					<g:form>
-					<g:hiddenField name="id" value="${editoreInstance?.id}"/>
-					<g:actionSubmit value="Delete" action="delete.dispatch" />
-					</g:form>
-            	</div>
-            </g:if>
->>>>>>> 78c565dbf04bfb04402eb7ecfeb0b88ffc6a9390
+
         </div>
     </body>
 </html>
