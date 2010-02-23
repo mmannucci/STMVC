@@ -21,9 +21,9 @@
                         <tr>
 
                         
-                            <st:sortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
+                            <st:sortableColumn  property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
                         
-                            <st:sortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
+                            <st:sortableColumn  property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
 
                         </tr>
                     </thead>
@@ -31,7 +31,7 @@
                     <g:each in="${editoreInstanceList}" status="i" var="editoreInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><st:link controller="editore" action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</st:link></td>
+                            <td><st:link action="show" id="${editoreInstance.id}">${fieldValue(bean: editoreInstance, field: "id")}</st:link></td>
                         
                             <td>${fieldValue(bean: editoreInstance, field: "nome")}</td>
                         
