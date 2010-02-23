@@ -14,7 +14,17 @@
 	<classpathentry kind="lib" path="lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-validator-4.0.2.GA.jar"/>
 	<classpathentry kind="lib" path="lib/my.jar"/>
-	<classpathentry kind="lib" path="F:/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="F:/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="/Applications/java/Hibernate/hibernate-distribution-3.3.2.GA/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/Applications/java/Hibernate/hibernate-annotations-3.4.0.GA/hibernate-annotations.jar"/>
+	<classpathentry kind="src" path="hibernate-1.2.0-grails-app-i18n">
+		<attributes>
+			<attribute name="com.springsource.sts.grails.core.SOURCE_FOLDER" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="tomcat-1.2.0-src-groovy">
+		<attributes>
+			<attribute name="com.springsource.sts.grails.core.SOURCE_FOLDER" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="web-app/WEB-INF/classes"/>
 </classpath>

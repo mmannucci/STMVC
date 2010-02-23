@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="create" controller="editore" action="list""><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" controller="editore" action="create""><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="editore" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -31,7 +31,7 @@
                                 <td valign="top" class="name">
                                   <label for="nome"><g:message code="editore.nome.label" default="Nome" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty 'nome')}">
+                                <td valign="top" class="value ${hasPropertyError(bean: editoreInstance, beanProperty: 'nome')}">
                                     <g:textField name="nome" value="${editoreInstance?.nome}" />
                                 </td>
                             </tr>
@@ -39,12 +39,12 @@
                         </tbody>
                     </table>
                 </div>
-               <div class="buttons">
-                	<span class="button">
-                	<span class="menuButton"><span class="button"><g:stLink controller="editore" action="edit" id="${editoreInstance?.id}" >Edit</g:stLink>
-                	</span>
-                    <span class="menuButton"><span class="button"><g:stLink controller="editore" action="delete" id="${editoreInstance?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">Delete</g:stLink></span>
-                </div>
+                <div class="buttons">
+                   <span class="button"><input type="submit" name=update value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+                   <span class="button"><input type="submit" name="undo" value="${message(code: 'default.button.undo.label', default: 'Undo')}"/></span>
+                  	<span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+                  
+                  </div>
             </g:form>
         </div>
     </body>

@@ -49,7 +49,7 @@ public class Autore {
 	public Autore() {
 
 	}
-
+   
 	public Autore(Long id) {
 		this.id = id;
 	}
@@ -63,7 +63,7 @@ public class Autore {
 	public void setLibros(Set<Libro> libros) {
 		this.libros = libros;
 	}
-
+  
 	@Id
 	@GeneratedValue
 	public Long getId() {

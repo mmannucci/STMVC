@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-@Controller
+@Controller("EditoreController")
+@RequestMapping(value="/editore")
 public class EditoreController {
 
 	@Autowired
 	protected SessionFactory sessionFactory;
 
-	@RequestMapping(value = {"/editore.dispatch", "/editore/list.dispatch"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
 			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, ModelMap modelMap) {
 		int sizeNo = max == null ? 10 : max.intValue();
@@ -32,14 +32,14 @@ public class EditoreController {
 		return "/editore/list";
 	}
 
-	@RequestMapping(value = "/editore/create.dispatch", method = RequestMethod.GET)
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
-		//System.out.println("....dentro create##################");
+
 		modelMap.addAttribute("editoreInstance", new Editore());
 		return "/editore/create";
 	}
 
-	@RequestMapping(value = "/editore/save.dispatch", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(HttpServletRequest request, ModelMap modelMap) {
 		Editore editore = Editore.create();
 		MyUtils.bindDataFromMap(editore, request);
@@ -51,22 +51,23 @@ public class EditoreController {
 		return "redirect:/editore/" + id + ".dispatch";
 	}
 
-	@RequestMapping(value = {"/editore/{id}.dispatch", "/editore/show/{id}.dispatch"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{id}.dispatch", "/show/{id}.dispatch"}, method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));
 		return "/editore/show";
 	}
 
-	@RequestMapping(value = "/editore/edit/{id}.dispatch", method = RequestMethod.GET)
-	public String edit(@PathVariable("id") Long id, ModelMap modelMap) {
-		System.out.println(".....dentro edit........................");
+	
+	@RequestMapping(value = "/edit", params="edit",method = RequestMethod.POST)
+	public String edit(@RequestParam("id") Long id, ModelMap modelMap) {
+		System.out.println(".....dentro editShow11........................" + id);
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));
 		return "/editore/edit";
 	}
-
-	@RequestMapping(value = "/editore/update.dispatch", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/update", params="update",method = RequestMethod.POST)
 	public String update(@RequestParam("id") Long id, HttpServletRequest request, ModelMap modelMap) {
 
 		Editore editore = Editore.get(id);
@@ -80,10 +81,20 @@ public class EditoreController {
 		return "redirect:/editore/" + editore.getId() + ".dispatch";
 	}
 
-	@RequestMapping(value = "/editore/delete/{id}.dispatch", method = RequestMethod.GET)
-	public String delete(@PathVariable("id") Long id, @RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max) {
+	
+	//Usato sia in show.gsp che in edit.gsp
+	@RequestMapping(params="delete",method = RequestMethod.POST)
+	public String delete(@RequestParam("id") Long id) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		Editore.get(id).delete();
-		return "redirect:/editore.dispatch?offset=" + ((offset == null) ? "1" : offset.toString()) + "&max=" + ((max == null) ? "10" : max.toString());
+		return "redirect:/editore/list.dispatch";
 	}
+	
+	@RequestMapping(params="undo",method = RequestMethod.POST)
+	public String undo() {
+		return "redirect:/editore/list.dispatch";
+	}
+	
+	
+	
 }

@@ -38,10 +38,10 @@
                 </table>
             </div>
             <div class="buttons">
-                <g:form>
+                <g:form  controller="editore" action="edit.dispatch" method="POST">
                     <g:hiddenField name="id" value="${editoreInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" controller="editore" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" controller="editore" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                    <span class="button"><input type="submit" name="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                    <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                 </g:form>
             </div>
         </div>

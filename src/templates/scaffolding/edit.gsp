@@ -10,8 +10,8 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="\${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="list""><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
-            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="create""><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="list"><g:message code="default.list.label" args="[entityName]" /></g:stLink></span>
+            <span class="menuButton"><g:stLink class="create" controller="${domainClass.shortName.toLowerCase()}" action="create"><g:message code="default.new.label" args="[entityName]" /></g:stLink></span>
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -37,7 +37,7 @@
                                 <td valign="top" class="name">
                                   <label for="${p.name}"><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></label>
                                 </td>
-                                <td valign="top" class="value \${hasPropertyError(bean: ${propertyName}, beanProperty '${p.name}')}">
+                                <td valign="top" class="value \${hasPropertyError(bean: ${propertyName}, beanProperty:'${p.name}')}">
                                     ${renderEditor(p)}
                                 </td>
                             </tr>
