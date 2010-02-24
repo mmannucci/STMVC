@@ -46,9 +46,9 @@
                     </table>
                 </div>
                 <div class="buttons">
-                  	<span class="button"><input type="submit" name=update value="${message(code: 'default.button.update.label', default: 'Update')}"/></span>
-                    <span class="button"><input type="submit" name="undo" value="${message(code: 'default.button.undo.label', default: 'Undo')}"/></span>
-                  	<span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+                  	<span class="button"><input type="submit" name=update value="\${message(code: 'default.button.update.label', default: 'Update')}"/></span>
+                    <span class="button"><input type="submit" name="undo" value="\${message(code: 'default.button.undo.label', default: 'Undo')}"/></span>
+                  	<span class="button"><input type="submit" name="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                  
                 
                 </div>

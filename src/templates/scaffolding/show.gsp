@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="\${createLink(uri: '/')}">Home</a></span>
             <span class="menuButton"><st:link controller="editore" class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
             <span class="menuButton"><st:link controller="editore" class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
@@ -52,8 +52,8 @@
             <div class="buttons">
                 <g:form  controller="${domainClass.shortName.toLowerCase()}" method="POST" action="edit.dispatch">
                     <g:hiddenField name="id" value="\${${propertyName}?.id}" />
-                     <span class="button"><input type="submit" name="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-                     <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+                     <span class="button"><input type="submit" name="edit" value="\${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                     <span class="button"><input type="submit" name="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                    </g:form>
             </div>
         </div>
