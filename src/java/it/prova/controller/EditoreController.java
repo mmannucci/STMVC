@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller("EditoreController")
 @RequestMapping(value="/editore")
 public class EditoreController {
-	
-	
-
 
 	@Autowired
 	protected SessionFactory sessionFactory;
@@ -33,12 +30,11 @@ public class EditoreController {
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
 			@RequestParam(value = "sort", required = false) String sort, @RequestParam(value = "order", required = false) String order, HttpServletRequest request, ModelMap modelMap) {
 		int sizeNo = max == null ? 10 : max.intValue();
-		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : (offset.intValue() - 1), sizeNo, sort, order));
+		modelMap.addAttribute("editoreInstanceList", Editore.findAll(offset == null ? 0 : offset.intValue(), sizeNo, sort, order));
 		modelMap.addAttribute("editoreInstanceTotal", Editore.count());
 		
 		return "/editore/list";
 	}
-
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(ModelMap modelMap) {
@@ -59,25 +55,22 @@ public class EditoreController {
 		return "redirect:/editore/" + id + ".dispatch";
 	}
 
-	@RequestMapping(value = {"/{id}.dispatch", "/show/{id}.dispatch"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/{id}", "/show/{id}"}, method = RequestMethod.GET)
 	public String show(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));
 		return "/editore/show";
 	}
-
-
 	
-	@RequestMapping(value = "/edit", params="edit",method = RequestMethod.POST)
-	public String edit(@RequestParam("id") Long id, ModelMap modelMap) {
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("editoreInstance", Editore.get(id));
 		return "/editore/edit";
 	}
 	
-	@RequestMapping(value = "/update", params="update",method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@RequestParam("id") Long id, HttpServletRequest request, ModelMap modelMap) {
-		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, "editore");
 		Editore editore = Editore.get(id);
 		if (editore == null) throw new IllegalArgumentException("A editore is required");
 		MyUtils.bindDataFromMap(editore, request);

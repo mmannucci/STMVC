@@ -40,7 +40,7 @@ public class Editore {
 	
 	private List<Autore> autori = new ArrayList<Autore>();
 	
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany()
 	public List<Autore> getAutori() {
 		return autori;
 	}
@@ -48,10 +48,6 @@ public class Editore {
 	public void setAutori(List<Autore> autori) {
 		this.autori = autori;
 	}
-
-	
-
-	
 
 	@Autowired
 	private Validator validator;

@@ -1,5 +1,6 @@
 
 import it.prova.model.Autore;
+import it.prova.model.Editore;
 import it.prova.model.Libro;
 import it.prova.model.Utente;
 
@@ -25,6 +26,12 @@ class BootStrap {
 		a2.addToLibros(l2)
 		
 		10.times {new it.prova.model.Editore(nome:'a'+it).save()}
+		
+		def e = new Editore(nome:'Editore Ricco')
+		e.save()
+		e.addToAutori(a1)
+		e.addToAutori(a2)
+		
 		/*
 		GrailsApplication application = ApplicationHolder.getApplication()
 		try{
