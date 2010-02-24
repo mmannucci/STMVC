@@ -28,6 +28,19 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="editore.autori.label" default="Autori" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${editoreInstance.autori}" var="a">
+                                    <li><g:link controller="autore" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="editore.nome.label" default="Nome" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: editoreInstance, field: "nome")}</td>
@@ -37,15 +50,13 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="buttons">
-                <g:form  controller="editore" action="edit.dispatch" method="POST">
+                <g:form  controller="editore" method="POST" action="edit.dispatch">
                     <g:hiddenField name="id" value="${editoreInstance?.id}" />
-                    <span class="button"><input type="submit" name="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-                    <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
-                </g:form>
+                     <span class="button"><st:link controller="editore" action="edit" id="${editoreInstance?.id}">Edit</st:link></span>
+                     <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
+                   </g:form>
             </div>
-
         </div>
     </body>
 </html>

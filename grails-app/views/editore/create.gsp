@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><st:link controller="editore" class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="list" controller="editore" action="list"><g:message code="default.list.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
@@ -38,9 +38,8 @@
                     </table>
                 </div>
                 <div class="buttons">
-                <span class="button"><input type="submit" name="save" value="${message(code: 'default.button.save.label', default: 'Save')}"/></span>
-                      
-  				</div>
+                <span class="button"><input type="submit" name="save" value="<g:message code='default.button.save.label' default='Save'/>" /></span>
+                </div>
             </g:form>
         </div>
     </body>
