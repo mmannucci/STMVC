@@ -10,7 +10,7 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
-            <span class="menuButton"><st:link class="create" controller="editore" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
+            <span class="menuButton"><st:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></st:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -20,11 +20,11 @@
                     <thead>
                         <tr>
                         
-                            <st:sortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
+                            <g:sortableColumn controller="editore" property="id" title="${message(code: 'editore.id.label', default: 'Id')}" />
                         
                             <th><g:message code="editore.autori.label" default="Autori" /></th>
                    	    
-                            <st:sortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
+                            <g:sortableColumn controller="editore" property="nome" title="${message(code: 'editore.nome.label', default: 'Nome')}" />
                         
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="${editoreInstanceTotal}" action="list.dispatch"/>
+                <g:paginate total="${editoreInstanceTotal}"  action="list.dispatch"/>
             </div>
         </div>
     </body>
