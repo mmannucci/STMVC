@@ -45,6 +45,15 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                    <label for="editore"><g:message code="autore.editore.label" default="Editore" /></label>
+                                </td>
+                                 <td valign="top" class="value ${hasPropertyError(bean: autoreInstance, beanProperty:'editore')}">
+                                    <g:select name="editore.id" from="${it.prova.model.Editore.list()}" optionKey="id" value="${autoreInstance?.editore?.id}"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                     <label for="nome"><g:message code="autore.nome.label" default="Nome" /></label>
                                 </td>
                                  <td valign="top" class="value ${hasPropertyError(bean: autoreInstance, beanProperty:'nome')}">

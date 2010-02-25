@@ -4,7 +4,6 @@ import it.prova.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -38,14 +38,16 @@ public class Editore {
 	private Long id;
 	private Long version;   
 	
-	private List<Autore> autori = new ArrayList<Autore>();
 	
-	@OneToMany()
-	public List<Autore> getAutori() {
+	private Set<Autore> autori = new HashSet<Autore>();
+	
+	@OneToMany
+	@JoinColumn(name = "fk_editore")
+	public Set<Autore> getAutori() {
 		return autori;
 	}
 
-	public void setAutori(List<Autore> autori) {
+	public void setAutori(Set<Autore> autori) {
 		this.autori = autori;
 	}
 

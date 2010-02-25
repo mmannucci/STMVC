@@ -53,7 +53,7 @@
             <div class="buttons">
                 <g:form  controller="editore" method="POST" action="edit.dispatch">
                     <g:hiddenField name="id" value="${editoreInstance?.id}" />
-                     <span class="button"><input type="submit" name="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                     <span class="button"><st:link action="edit" id="${editoreInstance?.id}">${message(code: 'default.button.edit.label', default: 'Edit')}</st:link></span>
                      <span class="button"><input type="submit" name="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                    </g:form>
             </div>

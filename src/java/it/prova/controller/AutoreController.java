@@ -2,13 +2,11 @@ package it.prova.controller;
 
 
 import it.prova.model.Autore;
+import it.prova.model.Editore;
 import it.test.MyUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value="/autore")
 public class AutoreController {
 
-	@Autowired
-	protected SessionFactory sessionFactory;
 
 	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
 	public String list(@RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "max", required = false) Integer max,
@@ -62,8 +58,8 @@ public class AutoreController {
 
 
 	
-	@RequestMapping(value = "/edit", params="edit",method = RequestMethod.POST)
-	public String edit(@RequestParam("id") Long id, ModelMap modelMap) {
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null) throw new IllegalArgumentException("An Identifier is required");
 		modelMap.addAttribute("autoreInstance", Autore.get(id));
 		return "/autore/edit";
@@ -71,7 +67,6 @@ public class AutoreController {
 	
 	@RequestMapping(value = "/update", params="update",method = RequestMethod.POST)
 	public String update(@RequestParam("id") Long id, HttpServletRequest request, ModelMap modelMap) {
-		request.setAttribute(org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes.CONTROLLER_NAME_ATTRIBUTE, "autore");
 		Autore autore = Autore.get(id);
 		if (autore == null) throw new IllegalArgumentException("A autore is required");
 		MyUtils.bindDataFromMap(autore, request);

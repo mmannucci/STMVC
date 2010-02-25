@@ -27,7 +27,7 @@ class BootStrap {
 		
 		10.times {new it.prova.model.Editore(nome:'a'+it).save()}
 		
-		def e = new Editore(nome:'Editore Ricco')
+		def e = new Editore(nome:'Editore')
 		e.save()
 		e.addToAutori(a1)
 		e.addToAutori(a2)

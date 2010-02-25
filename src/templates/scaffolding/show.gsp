@@ -52,7 +52,7 @@
             <div class="buttons">
                 <g:form  controller="${domainClass.shortName.toLowerCase()}" method="POST" action="edit.dispatch">
                     <g:hiddenField name="id" value="\${${propertyName}?.id}" />
-                     <span class="button"><input type="submit" name="edit" value="\${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                     <span class="button"><st:link action="edit" id="\${${propertyName}?.id}">\${message(code: 'default.button.edit.label', default: 'Edit')}</st:link></span>
                      <span class="button"><input type="submit" name="delete" value="\${message(code: 'default.button.delete.label', default: 'Delete')}"/></span>
                    </g:form>
             </div>

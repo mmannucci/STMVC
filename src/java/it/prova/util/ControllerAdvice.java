@@ -16,7 +16,7 @@ public class ControllerAdvice {
 	public void setRequestParameters(JoinPoint pjp) {
 		Signature sig = pjp.getSignature();
 		
-		String declaringTypeName = sig.getDeclaringTypeName(); 
+		String declaringTypeName = sig.getDeclaringType().getSimpleName(); 
 		String controllerName = declaringTypeName.substring(0, declaringTypeName.indexOf("Controller")).toLowerCase();
 		
 		String actionName = sig.getName();

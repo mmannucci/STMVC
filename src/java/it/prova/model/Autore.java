@@ -2,23 +2,27 @@ package it.prova.model;
 
 import it.prova.util.HibernateUtil;
 
-import java.util.Iterator;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.persistence.Version;
-import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.codehaus.groovy.grails.commons.ApplicationHolder;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -27,7 +31,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
-import java.util.*;
 
 @Component 
 @Scope("prototype")
@@ -49,6 +52,8 @@ public class Autore {
 	private String cognome;
 	private Date date;
 	private Set<Libro> libros = new HashSet<Libro>(0);
+	
+	private Editore editore;
 
 	public Autore() {
 
@@ -66,6 +71,16 @@ public class Autore {
 
 	public void setLibros(Set<Libro> libros) {
 		this.libros = libros;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_editore")
+	public Editore getEditore() {
+		return editore;
+	}
+	
+	public void setEditore(Editore editore) {
+		this.editore = editore;
 	}
   
 	@Id
@@ -134,15 +149,16 @@ public class Autore {
 	}
 	
 	public static Autore get(Long id) {
-		return (Autore) HibernateUtil.sessionFactory().getCurrentSession().get(Autore.class, id);
+		Session session = HibernateUtil.sessionFactory().getCurrentSession(); 
+		return (Autore) session.get(Autore.class, id);
 	}
 	
-	public static List<Editore> list() {
+	public static List<Autore> list() {
 		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Autore");
-		return (List<Editore>)q.list();
+		return (List<Autore>)q.list();
 	}
 	
-	public static List<Editore> findAll(int offset, int max, String sort, String order) {
+	public static List<Autore> findAll(int offset, int max, String sort, String order) {
 		
 		String sortFragment = "";
 		if (sort != null && order != null) {
@@ -152,7 +168,7 @@ public class Autore {
 		Query q = HibernateUtil.sessionFactory().getCurrentSession().createQuery("from Autore" + sortFragment);
 		q.setFirstResult(offset);
 		q.setMaxResults(max);
-		return (List<Editore>)q.list();
+		return (List<Autore>)q.list();
 	}
 	
 	public static long count() {
@@ -163,8 +179,8 @@ public class Autore {
 		return (Long) HibernateUtil.sessionFactory().getCurrentSession().save(this);
 	}
 	
-	public Editore update() {
-		return (Editore) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
+	public Autore update() {
+		return (Autore) HibernateUtil.sessionFactory().getCurrentSession().merge(this);
 	}
 	
 	public void delete() {
