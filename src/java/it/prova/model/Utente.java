@@ -1,16 +1,27 @@
 package it.prova.model;
 
+import it.prova.services.MyServices;
+import it.prova.util.HibernateUtil;
+
+import javax.annotation.Resource;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.codehaus.groovy.grails.commons.DefaultGrailsApplication;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component 
+@Scope("prototype")
 @Entity
 public class Utente {
+	
 	
 	private Long id;
 	private String login;
@@ -74,6 +85,9 @@ public class Utente {
 		return "nome: "+nome+" cognome:"+cognome;
 	}
 	
-	
+	public  Utente findByLoginAndPwd(String login,String pwd){
+		
+		return UtenteQuery.findByLoginAndPwd(login, pwd);
+	}
 
 }

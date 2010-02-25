@@ -3,12 +3,16 @@ package it.prova.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.persistence.Transient;
+
 import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
 import it.prova.model.Utente;
 import it.prova.model.UtenteQuery;
+import it.prova.services.MyServices;
 
 import org.codehaus.groovy.grails.commons.ControllerArtefactHandler;
 import org.codehaus.groovy.grails.commons.DefaultGrailsApplication;
@@ -28,14 +32,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class UtenteController {
 	
 	@Autowired
+	private MyServices myServices;
+	
+	@Autowired
 	protected SessionFactory sessionFactory;
 	
 	@RequestMapping("/checkUtente.dispatch")
 	public String login(Utente u) {
 		
+		try {
+			myServices.test();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		Utente ux = UtenteQuery.findByLoginAndPwd(u.getLogin(), u.getPassword());
+		Utente uy = new Utente();
+		Utente ux = uy.findByLoginAndPwd(u.getLogin(), u.getPassword());
 		
 		if(ux != null){
 			return "forward:/editore/list.dispatch";
